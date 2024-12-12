@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Didico - Produtos</title>
+    <link rel="stylesheet" href="StyleEcommerceDidi.css">
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="Untitled-1.html" class="Logo">
+                <i class='bx bxs-analyse'></i> Didico
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="Untitled-1.html">Home</a></li>
+                    <li><a href="#products">Produtos</a></li>
+                    <li><a href="Formulario.html">Contato</a></li>
+                    <li><a href="Checkout.html" class="header-icons"><i class='bx bx-cart'></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Encontre os melhores Headsets aqui!</h2>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Produtos</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="product1.png" alt="Produto 1">
+                    <h3>Headset Bluetooth X1</h3>
+                    <p>R$ 100,00</p>
+                    <button class="btn" onclick="adicionarCarrinho('Headset Bluetooth X1', 100.00)">Comprar</button>
+                </div>
+                <div class="product-card">
+                    <img src="product2.png" alt="Produto 2">
+                    <h3>Headset Bluetooth Y2</h3>
+                    <p>R$ 150,00</p>
+                    <button class="btn" onclick="adicionarCarrinho('Headset Bluetooth Y2', 150.00)">Comprar</button>
+                </div>
+                <div class="product-card">
+                    <img src="product3.png" alt="Produto 3">
+                    <h3>Headset Bluetooth Z3</h3>
+                    <p>R$ 200,00</p>
+                    <button class="btn" onclick="adicionarCarrinho('Headset Bluetooth Z3', 200.00)">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button class="close-btn" onclick="fecharPopup()">Fechar</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Meu E-commerce. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function adicionarCarrinho(produtoNome, produtoPreco) {
+        // Recupera o carrinho do localStorage, ou inicializa como um array vazio
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        // Adiciona o novo produto ao carrinho
+        carrinho.push({ name: produtoNome, price: produtoPreco });
+
+        // Atualiza o localStorage com o novo carrinho
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        // Exibe o popup de confirmação
+        document.getElementById('popup-message').innerText = `${produtoNome} foi adicionado ao carrinho!`;
+        document.getElementById('popup').classList.add('show');
+    }
+
+    function fecharPopup() {
+        // Fecha o popup de confirmação
+        document.getElementById('popup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>

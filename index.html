@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+    <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TD27LHTT');</script>
+    <!-- End Google Tag Manager -->
+
+        <meta CHARSET="UTF-8">
+        <meta http-equiv="X-AU-Compatible" constent="IE-Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!--ConexãoBoxIcons-->
+        <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <!-- or -->
+        <link rel="stylesheet"
+        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+<!--ConexãoGoogleFonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="cssdidi.css">
+        <title>Didico</title>
+    </head>
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD27LHTT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+     
+        <header>
+            <a href="#" class="Logo">
+                <i class='bx bxs-analyse'></i> Didico
+            </a>
+                <ul class="Navegação">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="Ecommerce DiDi.html">produtos</a></li>
+                    <li><a href="#">Categoria</a></li> 
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="Formulario.html">Contatos</a></li>
+                </ul>
+            <div>
+                <a href="Checkout.html" class="header-icons">
+                    <i class='bx bx-cart'></i>
+                    <div id="menu">
+                        <i class='bx bx-menu'></i></div>
+            </div>
+        </header>
+        <section class="home">
+            <div class="home-img">
+                <img src="product3.png" class="one">
+            </div>
+
+            <div class="home-text">
+    
+                <h1> HeadSets Bluetooth </h1>
+                
+                <a href="Ecommerce DiDi.html" class="btn">Saiba Mais</a>
+            </div>
+        </section>
+        <div class="main">
+            <div class="row">
+                <li><img src="main1.png" onclick="slider('product1.png')"></li>
+            </div>
+    
+            <div class="row2">
+                <li><img src="main2.png" onclick="slider('product2.png')"></li>
+            </div>
+    
+            <div class="row3">
+                <li><img src="main3.png" onclick="slider('product3.png')"></li>
+            </div>
+        </div>
+        
+
+        <script>
+            function slider(anything) {
+        document.querySelector('.one').src = anything;
+    }
+
+    const images = ['product1.png', 'product2.png', 'product3.png'];
+    let currentIndex = 0;
+
+    function autoSlider() {
+        currentIndex = (currentIndex + 1) % images.length;
+        document.querySelector('.one').src = images[currentIndex];
+    }
+
+    setInterval(autoSlider, 2000);
+
+    let menu = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
+
+    menu.onclick = () => {
+        menu.classList.toggle('bx-x');
+        navbar.classList.toggle('open');
+    }
+        </script>
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Meu E-commerce. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </body>
+</html>
