@@ -100,10 +100,11 @@
         menu.classList.toggle('bx-x');
         navbar.classList.toggle('open');
     }
+        document.getElementById("year").textContent = new Date().getFullYear();
         </script>
         <footer class="footer">
             <div class="container">
-                <p>&copy; 2024 Meu E-commerce. Todos os direitos reservados.</p>
+                <p>&copy; <span id="year"></span> Meu E-commerce. Todos os direitos reservados.</p>
             </div>
         </footer>
     </body>
