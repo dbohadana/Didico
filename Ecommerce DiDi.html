@@ -36,21 +36,21 @@
                     <img src="product1.png" alt="Produto 1">
                     <h2>Headset Bluetooth X1</h2>
                     <p>R$ 199,00</p>
-                    <a href="Ecommerce DiDi.html/Checkout.html" class="btn">Adicionar ao Carrinho</a>
+                    <a href="#" class="btn">Adicionar ao Carrinho</a>
                 </div>
 
                 <div class="product-item">
                     <img src="product2.png" alt="Produto 2">
                     <h2>Headset Bluetooth Y2</h2>
                     <p>R$ 249,00</p>
-                    <a href="Ecommerce DiDi.html/Checkout.html" class="btn">Adicionar ao Carrinho</a>
+                    <a href="#" class="btn">Adicionar ao Carrinho</a>
                 </div>
 
                 <div class="product-item">
                     <img src="product3.png" alt="Produto 3">
                     <h2>Headset Bluetooth Z3</h2>
                     <p>R$ 299,00</p>
-                    <a href="Ecommerce DiDi.html/Checkout.html" class="btn">Adicionar ao Carrinho</a>
+                    <a href="#" class="btn">Adicionar ao Carrinho</a>
                 </div>
             </div>
         </section>
@@ -83,10 +83,9 @@
 
                 const btn = item.querySelector(".btn");
                 if (btn) {
-                    btn.addEventListener("click", function (event) {
-                        event.preventDefault();
+                    btn.addEventListener("click", function () {
                         window.dataLayer.push({
-                            event: 'view_item',
+                            event: 'add_to_cart',
                             ecommerce: {
                                 items: [{
                                     item_id: itemId,
@@ -95,6 +94,9 @@
                                 }]
                             }
                         });
+
+                        // Redireciona para a página Checkout.html
+                        window.location.href = "Checkout.html";
                     });
                 }
             });
