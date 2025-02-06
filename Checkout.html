@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TD27LHTT');</script>
     <!-- End Google Tag Manager -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJSQ96CH0T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-NJSQ96CH0T');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJSQ96CH0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NJSQ96CH0T');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho de Compras</title>
@@ -56,6 +58,16 @@
         .btn:hover {
             background-color: #0056b3;
         }
+        .checkout-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #28a745;
+        }
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +104,7 @@
                 <li>Carrinho vazio</li>
             </ul>
             <h3>Total: R$ <span id="total-price">0.00</span></h3>
+            <button class="btn checkout-btn" id="checkout-btn">Finalizar Compra</button>
         </div>
     </div>
 
@@ -100,6 +113,7 @@
 
         const cartSummary = document.getElementById('cart-summary');
         const totalPriceElement = document.getElementById('total-price');
+        const checkoutButton = document.getElementById('checkout-btn');
         let totalPrice = 0;
         let cartItems = [];
 
@@ -118,7 +132,7 @@
 
             totalPriceElement.textContent = totalPrice.toFixed(2);
 
-            // Atualiza o dataLayer com os itens do carrinho
+            // Dispara o evento view_cart sempre que o carrinho for atualizado
             window.dataLayer.push({
                 event: 'view_cart',
                 ecommerce: {
@@ -145,6 +159,42 @@
 
         // Dispara o evento view_cart ao carregar a página
         document.addEventListener("DOMContentLoaded", function () {
+            updateCart();
+        });
+
+        // Gera um transaction_id único
+        function generateTransactionId() {
+            return 'T' + Math.floor(Date.now() * Math.random()).toString(16);
+        }
+
+        // Evento de compra ao clicar no botão "Finalizar Compra"
+        checkoutButton.addEventListener('click', function () {
+            if (cartItems.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            const transactionId = generateTransactionId();
+
+            window.dataLayer.push({
+                event: 'purchase',
+                ecommerce: {
+                    transaction_id: transactionId,
+                    value: totalPrice,
+                    currency: 'BRL',
+                    items: cartItems.map((item, index) => ({
+                        item_id: `P${index + 1}`,
+                        item_name: item.name,
+                        price: item.price
+                    }))
+                }
+            });
+
+            alert("Compra finalizada! Evento enviado para o dataLayer.");
+            
+            // Limpa o carrinho após a compra
+            cartItems = [];
+            totalPrice = 0;
             updateCart();
         });
 
