@@ -59,10 +59,12 @@
     </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD27LHTT"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD27LHTT"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
     <div class="container">
         <h1>Carrinho de Compras</h1>
 
@@ -94,22 +96,12 @@
     </div>
 
     <script>
+        window.dataLayer = window.dataLayer || [];
+
         const cartSummary = document.getElementById('cart-summary');
         const totalPriceElement = document.getElementById('total-price');
         let totalPrice = 0;
         let cartItems = [];
-
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const productName = button.dataset.name;
-                const productPrice = parseFloat(button.dataset.price);
-
-                cartItems.push({ name: productName, price: productPrice });
-                totalPrice += productPrice;
-
-                updateCart();
-            });
-        });
 
         function updateCart() {
             cartSummary.innerHTML = '';
@@ -125,8 +117,37 @@
             }
 
             totalPriceElement.textContent = totalPrice.toFixed(2);
+
+            // Atualiza o dataLayer com os itens do carrinho
+            window.dataLayer.push({
+                event: 'view_cart',
+                ecommerce: {
+                    items: cartItems.map((item, index) => ({
+                        item_id: `P${index + 1}`,
+                        item_name: item.name,
+                        price: item.price
+                    }))
+                }
+            });
         }
-        
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productName = button.dataset.name;
+                const productPrice = parseFloat(button.dataset.price);
+
+                cartItems.push({ name: productName, price: productPrice });
+                totalPrice += productPrice;
+
+                updateCart();
+            });
+        });
+
+        // Dispara o evento view_cart ao carregar a página
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCart();
+        });
+
     </script>
 </body>
 </html>
